@@ -2,7 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-import { prisma } from "./prisma/index.js";
+import mongoose from "mongoose";
+import userRoutes from "./routes/user.js";
+import movieRoutes from "./routes/movie.js";
 
 const app = express();
 app.use(cors());
@@ -24,21 +26,31 @@ app.use(
   })
 );
 
+const connectionString = process.env.DATABASE_URL;
+
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
+});
+
 app.use("/", (req, res) => {
   res.status(200).json({
     message: `Server Running!`,
   });
 });
-let variable;
-async function main() {
-  variable = await prisma.actor.create({
-    data: {
-      name: "Bilal Ahmed",
-    },
-  });
-}
-main();
+
+// user routes
+app.use("/api", userRoutes);
+// movie routes
+app.use("/api", movieRoutes);
 
 app.listen(port, () => {
-  console.log(`${variable}\nServer Running at port: ${port}`);
+  console.log(`Server Running at port: ${port}`);
 });
