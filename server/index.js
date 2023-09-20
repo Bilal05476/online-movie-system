@@ -40,16 +40,16 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
+// user routes
+app.use("/api/user", userRoutes);
+// movie routes
+app.use("/api/movie", movieRoutes);
+
 app.use("/", (req, res) => {
   res.status(200).json({
     message: `Server Running!`,
   });
 });
-
-// user routes
-app.use("/api", userRoutes);
-// movie routes
-app.use("/api", movieRoutes);
 
 app.listen(port, () => {
   console.log(`Server Running at port: ${port}`);

@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const userSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
-    admin: Boolean,
+    admin: { type: Boolean, default: false },
     email: {
       type: String,
       required: [true, "Please provide an email"],
