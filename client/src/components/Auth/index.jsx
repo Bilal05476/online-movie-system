@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import PillsItem from "../../common/PillsItem";
+import { useStateValue } from "../../StateProvider";
 
 const Auth = () => {
   const [comState, setComState] = useState("Login");
+  const [{}, dispatch] = useStateValue();
+
   return (
     <div className="container-fluid">
-      <div className="container p-5">
+      <div className="container p-5 auth">
         {/* Pills navs */}
         <ul
           className="nav nav-pills nav-justified mb-3"
@@ -27,8 +30,12 @@ const Auth = () => {
 
         {/* Pills content */}
         <div className="tab-content">
-          {comState === "Login" && <SignIn comState={comState} />}
-          {comState === "Register" && <SignUp comState={comState} />}
+          {comState === "Login" && (
+            <SignIn comState={comState} dispatch={dispatch} />
+          )}
+          {comState === "Register" && (
+            <SignUp comState={comState} dispatch={dispatch} />
+          )}
         </div>
         {/* Pills content */}
       </div>
