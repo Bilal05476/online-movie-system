@@ -4,7 +4,17 @@ import {
   BsChevronCompactUp,
   BsSearch,
 } from "react-icons/bs";
-const Header = ({ user, profilePopover, setProfilePopover }) => {
+import { fetchmovies } from "../endPoint";
+import { useStateValue } from "../../StateProvider";
+const Header = ({
+  user,
+  profilePopover,
+  setProfilePopover,
+  query,
+  setQuery,
+}) => {
+  const [{ searched }, dispatch] = useStateValue();
+  console.log(searched);
   return (
     <div className="d-flex align-items-center header justify-content-between ">
       {/* Logo */}
@@ -20,8 +30,10 @@ const Header = ({ user, profilePopover, setProfilePopover }) => {
             className="search mx-3 bg-transparent text-light"
             type="text"
             placeholder="Search..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
-          <BsSearch size={20} />
+          <BsSearch onClick={() => fetchmovies(dispatch, query)} size={20} />
         </div>
         {user ? (
           <span

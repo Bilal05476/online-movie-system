@@ -1,5 +1,40 @@
 import Movie from "../models/movie.js";
 
+// @route /api/movie
+// @method GET
+// @desc Find all movies stored in the system
+export const findMovies = async (req, res) => {
+  if (req.query.query) {
+    // find searched movies stored in the system
+    const { query } = req.query;
+    const regex = new RegExp(query, "i"); // Case-insensitive search
+    const matchingMovies = await Movie.find({ title: regex });
+    if (matchingMovies) {
+      return res.status(200).json(matchingMovies);
+    }
+  } else {
+    // find all the movies stored in the system
+    const movies = await Movie.find({});
+    if (movies) {
+      return res.status(200).json(movies);
+    }
+  }
+};
+
+// @route /api/movie/:id
+// @method GET
+// @desc Find movie by id stored in the system
+export const findMovie = async (req, res) => {
+  // find all the movies stored in the system
+  const movie = await Movie.findById({
+    _id: req.params.id,
+  });
+
+  if (movie) {
+    return res.status(200).json(movie);
+  }
+};
+
 // @route /api/movie/create
 // @method POST
 // @desc Add new a movie into system

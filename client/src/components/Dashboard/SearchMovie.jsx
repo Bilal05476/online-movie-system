@@ -1,16 +1,20 @@
 import React from "react";
 import MovieItem from "./MovieItem";
 
-const SearchMovie = () => {
+const SearchMovie = ({ movies, query }) => {
   return (
-    <div className="movie-section" id="search">
-      <h3>Search for "Hello World"</h3>
-      <div className="movie-container">
-        {[...Array(10)].map((item) => (
-          <MovieItem key={item} />
-        ))}
-      </div>
-    </div>
+    <React.Fragment>
+      {movies.length > 0 && (
+        <div className="movie-section" id="search">
+          <h3>Search for "{query}"</h3>
+          <div className="movie-container">
+            {movies.map((item) => (
+              <MovieItem key={item._id} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
+    </React.Fragment>
   );
 };
 

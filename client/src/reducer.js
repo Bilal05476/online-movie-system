@@ -1,7 +1,7 @@
 export const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
-  toggleTheme: JSON.parse(localStorage.getItem("theme")) || false,
-  // postLike: 0,
+  movies: [],
+  searched: [],
 };
 
 const reducer = (state, action) => {
@@ -16,10 +16,16 @@ const reducer = (state, action) => {
         ...state,
         user: null,
       };
-    case "DARK_THEME":
+
+    case "SET_MOVIES":
       return {
         ...state,
-        toggleTheme: !state.toggleTheme,
+        movies: action.movies,
+      };
+    case "SET_SEARCHED_MOVIES":
+      return {
+        ...state,
+        searched: action.movies,
       };
 
     default:

@@ -1,5 +1,4 @@
 import React from "react";
-import BtnBlock from "../../common/BtnBlock";
 const Banner = () => {
   return (
     <div className="banner">

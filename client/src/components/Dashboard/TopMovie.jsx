@@ -1,15 +1,17 @@
 import React from "react";
 import MovieItem from "./MovieItem";
 
-const TopMovie = () => {
+const TopMovie = ({ movies }) => {
   return (
     <div className="movie-section">
       <h3>Top Rated Movies</h3>
-      <div className="movie-container">
-        {[...Array(10)].map((item) => (
-          <MovieItem key={item} />
-        ))}
-      </div>
+      {movies.length > 0 && (
+        <div className="movie-container">
+          {movies.map((item) => (
+            <MovieItem key={item._id} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

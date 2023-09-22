@@ -6,7 +6,8 @@ import { useStateValue } from "../../StateProvider";
 
 const Auth = () => {
   const [comState, setComState] = useState("Login");
-  const [{}, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
+  console.log(user);
 
   return (
     <div className="container-fluid">
