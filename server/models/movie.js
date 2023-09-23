@@ -40,6 +40,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  slug: {
+    type: String,
+  },
 });
 
 // Create the Movie model

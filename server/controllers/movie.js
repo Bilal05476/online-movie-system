@@ -61,17 +61,11 @@ export const addMovie = async (req, res) => {
     actors,
     releaseDate,
     bannerImage,
+    slug: title.toLowerCase().replaceAll(" ", "-"),
   });
 
   if (createMovie) {
-    return res.status(200).json({
-      id: createMovie._id,
-      title: createMovie.title,
-      description: createMovie.description,
-      actors: createMovie.actors,
-      releaseDate: createMovie.releaseDate,
-      bannerImage: createMovie.bannerImage,
-    });
+    return res.status(200).json(createMovie);
   } else {
     return res.status(400).json({ error: "Invalid movie data" });
   }
