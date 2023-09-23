@@ -1,5 +1,5 @@
 const BASEURL = "http://localhost:8080/api";
-export const register = async (userData, dispatch) => {
+export const register = async (userData, dispatch, navigate) => {
   // Make a POST request
   try {
     const res = await fetch(`${BASEURL}/user/register`, {
@@ -15,12 +15,13 @@ export const register = async (userData, dispatch) => {
       user: data,
     });
     localStorage.setItem("user", JSON.stringify(data));
+    navigate("/");
   } catch (err) {
     console.log(err.message);
   }
 };
 
-export const login = async (userData, dispatch) => {
+export const login = async (userData, dispatch, navigate) => {
   // Make a POST request
   try {
     const res = await fetch(`${BASEURL}/user/login`, {
@@ -31,11 +32,16 @@ export const login = async (userData, dispatch) => {
       body: JSON.stringify(userData),
     });
     const data = await res.json();
-    dispatch({
-      type: "SET_USER",
-      user: data,
-    });
-    localStorage.setItem("user", JSON.stringify(data));
+    if (data.error) {
+      alert(data.error);
+    } else {
+      dispatch({
+        type: "SET_USER",
+        user: data,
+      });
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/");
+    }
   } catch (err) {
     console.log(err.message);
   }

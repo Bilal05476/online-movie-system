@@ -3,7 +3,7 @@ import FormInput from "../../common/FormInput";
 import BtnBlock from "../../common/BtnBlock";
 import { register } from "../endPoint";
 
-const SignUp = ({ comState, dispatch }) => {
+const SignUp = ({ comState, dispatch, navigate }) => {
   const [registerState, setRegisterState] = useState({
     fullname: "",
     email: "",
@@ -15,7 +15,7 @@ const SignUp = ({ comState, dispatch }) => {
     e.preventDefault();
     if (email && password && fullname) {
       if (password === cPassword && password.length >= 8) {
-        register({ email, password, name: fullname }, dispatch);
+        register({ email, password, name: fullname }, dispatch, navigate);
       } else {
         if (password.length < 8) {
           alert("Passwords should be min 8 charcter long");
@@ -91,7 +91,7 @@ const SignUp = ({ comState, dispatch }) => {
         />
 
         {/* Submit button */}
-        <BtnBlock text="Sign Up" bgcolor="btn-primary" click={handleSubmit} />
+        <BtnBlock text="Sign Up" bgcolor="crimson" click={handleSubmit} />
       </form>
     </div>
   );

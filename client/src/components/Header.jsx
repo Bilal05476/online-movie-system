@@ -4,8 +4,9 @@ import {
   BsChevronCompactUp,
   BsSearch,
 } from "react-icons/bs";
-import { fetchmovies } from "../endPoint";
-import { useStateValue } from "../../StateProvider";
+import { fetchmovies } from "./endPoint";
+import { useStateValue } from "../StateProvider";
+import { NavLink } from "react-router-dom";
 const Header = ({
   user,
   profilePopover,
@@ -48,7 +49,9 @@ const Header = ({
             )}
           </span>
         ) : (
-          <button className="btn text-light bg-danger">Sign In</button>
+          <NavLink to="/login" className="btn text-light bg-danger">
+            Sign In
+          </NavLink>
         )}
       </div>
     </div>

@@ -3,7 +3,7 @@ import BtnBlock from "../../common/BtnBlock";
 import FormInput from "../../common/FormInput";
 import { login } from "../endPoint";
 
-const SignIn = ({ comState, dispatch }) => {
+const SignIn = ({ comState, dispatch, navigate }) => {
   const [loginState, setLoginState] = useState({
     email: "",
     password: "",
@@ -12,7 +12,7 @@ const SignIn = ({ comState, dispatch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      login({ email, password }, dispatch);
+      login({ email, password }, dispatch, navigate);
     } else {
       alert("Provide all fields");
     }
@@ -54,7 +54,7 @@ const SignIn = ({ comState, dispatch }) => {
         />
 
         {/* Submit button */}
-        <BtnBlock text="Sign In" bgcolor="btn-primary" click={handleSubmit} />
+        <BtnBlock text="Sign In" bgcolor="crimson" click={handleSubmit} />
       </form>
     </div>
   );

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "../../StateProvider";
-import Header from "./Header";
+import Header from "../Header";
 import ProfilePopOver from "./ProfilePopOver";
 import Banner from "./Banner";
-import TopMovie from "./TopMovie";
-import RecentMovie from "./RecentMovie.jsx";
-import SearchMovie from "./SearchMovie";
+import TopMovie from "./Movies/TopMovie";
+// import RecentMovie from "./RecentMovie.jsx";
+import SearchMovie from "./Movies/SearchMovie";
 import { fetchmovies } from "../endPoint";
 const Dashboard = () => {
   const [{ user, movies, searched }, dispatch] = useStateValue();

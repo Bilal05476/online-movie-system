@@ -5,7 +5,8 @@ const BtnBlock = ({ text, bgcolor, click }) => {
     <button
       type="submit"
       onClick={click}
-      className={`btn ${bgcolor} btn-block w-100 mb-4`}
+      style={{ backgroundColor: bgcolor }}
+      className={`btn text-light btn-block w-100 mb-4`}
     >
       {text}
     </button>
