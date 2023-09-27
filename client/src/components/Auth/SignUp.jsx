@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FormInput from "../../common/FormInput";
+import { FormInput } from "../../common/FormInput";
 import BtnBlock from "../../common/BtnBlock";
 import { register } from "../endPoint";
 

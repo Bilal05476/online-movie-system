@@ -21,17 +21,24 @@ export const findMovies = async (req, res) => {
   }
 };
 
-// @route /api/movie/:id
+// @route /api/movie/:slug
 // @method GET
 // @desc Find movie by id stored in the system
 export const findMovie = async (req, res) => {
-  // find all the movies stored in the system
-  const movie = await Movie.findById({
-    _id: req.params.id,
+  // find movie by id stored in the system
+  const movie = await Movie.find({
+    slug: req.params.slug,
+  }).populate({
+    path: "reviews.user",
+    select: "-password", // Exclude the 'password' field
   });
 
   if (movie) {
-    return res.status(200).json(movie);
+    return res.status(200).json(movie[0]);
+  } else {
+    return res
+      .status(404)
+      .json({ message: `No movie with that slug:${req.params.slug}` });
   }
 };
 
@@ -76,12 +83,12 @@ export const addMovie = async (req, res) => {
 // @desc Update a movie into system by movie id
 export const updateMovie = async (req, res) => {
   const id = req.params.id;
-  const { description, actors, releaseDate, bannerImage } = req.body;
+  const { description, actors, releaseDate, bannerImage, slug } = req.body;
 
   // check if movie exist in our database by id
   const existMovie = await Movie.findByIdAndUpdate(
     { _id: id },
-    { description, actors, releaseDate, bannerImage },
+    { description, actors, releaseDate, bannerImage, slug },
     { new: true }
   );
 
@@ -99,12 +106,22 @@ export const addReview = async (req, res) => {
   const id = req.params.id;
   const { reviews } = req.body;
 
-  // check if movie exist in our database by id
+  // find movie by id stored in the system
+  // const existedReviews = await Movie.findById({
+  //   _id: id,
+  // });
+  // existedReviews.reviews.push(reviews);
+  // const allReviews = existedReviews.reviews;
+
+  // // check if movie exist in our database by id
   const existMovie = await Movie.findByIdAndUpdate(
     { _id: id },
     { reviews },
     { new: true }
-  );
+  ).populate({
+    path: "reviews.user",
+    select: "-password", // Exclude the 'password' field
+  });
 
   if (!existMovie) {
     return res.status(400).json({ error: "Movie does not exist" });

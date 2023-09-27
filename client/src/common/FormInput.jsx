@@ -9,6 +9,7 @@ const FormInput = ({ type, id, label, value, onChange }) => {
         className="form-control"
         value={value}
         onChange={onChange}
+        placeholder={label}
       />
       <label className="form-label" htmlFor={id}>
         {label}
@@ -17,4 +18,22 @@ const FormInput = ({ type, id, label, value, onChange }) => {
   );
 };
 
-export default FormInput;
+const FormTextArea = ({ id, label, value, onChange, rows }) => {
+  return (
+    <div className="form-outline mb-4">
+      <textarea
+        type="text"
+        id={id}
+        className="form-control"
+        value={value}
+        onChange={onChange}
+        rows={rows}
+        placeholder={label}
+      />
+      <label className="form-label" htmlFor={id}>
+        {label}
+      </label>
+    </div>
+  );
+};
+export { FormInput, FormTextArea };

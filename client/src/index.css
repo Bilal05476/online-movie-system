@@ -5,7 +5,7 @@
 .movies-project {
   background-image: linear-gradient(
       to bottom,
-      rgba(74, 74, 74, 0.683),
+      rgba(47, 47, 47, 0.683),
       rgba(0, 0, 0, 0.87)
     ),
     url("/public/assets/img/banner.jpg");
@@ -13,6 +13,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+}
+input[type="radio"] {
+  display: none;
 }
 .container-fluid {
   padding: 0;
@@ -40,13 +43,17 @@ input,
 textarea {
   outline: none !important;
 }
-.auth {
+.auth,
+.movie-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0rem 20rem;
   min-height: 100vh;
+}
+.movie-screen {
+  padding: 0;
 }
 .search {
   border: 2px solid #ccc;
@@ -59,7 +66,8 @@ textarea {
   width: 100%;
 }
 .search::placeholder,
-.form-label {
+.form-label,
+.form-control::placeholder {
   color: #ccc !important;
 }
 
@@ -106,6 +114,62 @@ textarea {
   cursor: pointer;
 }
 
+.movie-screen .left {
+  color: white;
+}
+.movie-screen .left .banner-container {
+  overflow: hidden;
+  height: 350px;
+  border: 1px solid #ccc;
+  background: linear-gradient(120deg, #fe3f3f 25%, #fc1e1e 50%, #a41313 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 5px;
+  padding: 0;
+}
+.movie-screen .left .content-container h3 {
+  font-size: 2.5rem;
+  margin: 0rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.movie-screen .left .content-container p {
+  font-size: 1rem;
+  margin: 0rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  border-bottom: 1px solid crimson;
+  padding-bottom: 1rem;
+}
+.movie-screen .left .content-container span {
+  background-color: #a41313;
+  color: #fff;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  margin-right: 0.2rem;
+}
+.movie-screen .right {
+  border: 3px solid crimson;
+  border-radius: 10px;
+  height: 350px;
+  overflow: hidden;
+  background: linear-gradient(120deg, #fe3f3f 25%, #fc1e1e 50%, #a41313 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+.movie-screen .movie-reviews {
+  margin-top: 4rem;
+  border-top: 3px solid crimson;
+  padding: 4rem 0rem;
+}
+.movie-screen .movie-reviews .reviews-lists .review-item {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid crimson;
+}
+.movie-screen .movie-reviews .star {
+  cursor: pointer;
+}
+
 @keyframes loading {
   0% {
     background-position: 200% 0;
@@ -117,7 +181,8 @@ textarea {
 .movie-item:hover img {
   transform: scale(1.1);
 }
-.movie-item img {
+.movie-item img,
+.movie-screen .left .banner-container img {
   width: 100%;
   height: 100%;
 }

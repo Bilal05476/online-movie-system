@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BtnBlock from "../../common/BtnBlock";
-import FormInput from "../../common/FormInput";
+import { FormInput } from "../../common/FormInput";
 import { login } from "../endPoint";
 
 const SignIn = ({ comState, dispatch, navigate }) => {

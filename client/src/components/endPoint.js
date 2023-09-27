@@ -1,4 +1,5 @@
 const BASEURL = "http://localhost:8080/api";
+
 export const register = async (userData, dispatch, navigate) => {
   // Make a POST request
   try {
@@ -64,10 +65,48 @@ export const fetchmovies = async (dispatch, query) => {
         movies: data,
       });
     } else {
+      console.log(data);
       dispatch({
         type: "SET_MOVIES",
         movies: data,
       });
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const fetchmovie = async (slug, setState) => {
+  // Make a GET request
+  try {
+    const res = await fetch(`${BASEURL}/movie/${slug}`);
+    const data = await res.json();
+    if (data.message) {
+      console.log(data.message);
+    } else {
+      setState(data);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const postReview = async (movieId, reviews, setState) => {
+  // Make a POST request
+
+  try {
+    const res = await fetch(`${BASEURL}/movie/review/${movieId}`, {
+      method: "POST",
+      body: JSON.stringify(reviews),
+      // headers: {
+      //   con
+      // }
+    });
+    const data = await res.json();
+    if (data.message) {
+      console.log(data.message);
+    } else {
+      setState(data);
     }
   } catch (err) {
     console.log(err.message);
