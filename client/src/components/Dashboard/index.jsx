@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useStateValue } from "../../StateProvider";
 import Header from "../Header";
 import ProfilePopOver from "./ProfilePopOver";
@@ -7,26 +7,24 @@ import TopMovie from "./Movies/TopMovie";
 // import RecentMovie from "./RecentMovie.jsx";
 import SearchMovie from "./Movies/SearchMovie";
 import { fetchmovies } from "../endPoint";
-const Dashboard = () => {
+const Dashboard = ({ query }) => {
   const [{ user, movies, searched }, dispatch] = useStateValue();
-  const [profilePopover, setProfilePopover] = useState(false);
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetchmovies(dispatch);
   }, []);
 
   return (
-    <div className="container-fluid dashbaord" style={{ position: "relative" }}>
+    <div className="container-fluid dashbaord">
       {/* Header */}
-      <Header
+      {/* <Header
         user={user}
         profilePopover={profilePopover}
         setProfilePopover={setProfilePopover}
         query={query}
         setQuery={setQuery}
       />
-      {profilePopover && <ProfilePopOver />}
+      {profilePopover && <ProfilePopOver />} */}
       {/* Banner */}
       <Banner />
       <SearchMovie movies={searched} query={query} />

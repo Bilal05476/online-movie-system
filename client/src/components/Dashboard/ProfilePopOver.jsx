@@ -1,6 +1,8 @@
 import React from "react";
+import { useStateValue } from "../../StateProvider";
 
-const ProfilePopOver = () => {
+const ProfilePopOver = ({ setProfilePopover }) => {
+  const [{}, dispatch] = useStateValue();
   return (
     <div
       style={{
@@ -13,7 +15,18 @@ const ProfilePopOver = () => {
       className="p-2 d-flex flex-column"
     >
       <span className="text-white">Account</span>
-      <span className="text-white">Logout</span>
+      <span
+        className="text-white"
+        onClick={() => {
+          setProfilePopover(false);
+          dispatch({
+            type: "LOGOUT",
+          });
+          localStorage.clear();
+        }}
+      >
+        Logout
+      </span>
     </div>
   );
 };

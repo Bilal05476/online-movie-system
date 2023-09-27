@@ -83,12 +83,12 @@ export const addMovie = async (req, res) => {
 // @desc Update a movie into system by movie id
 export const updateMovie = async (req, res) => {
   const id = req.params.id;
-  const { description, actors, releaseDate, bannerImage, slug } = req.body;
+  const { description, actors, releaseDate, bannerImage, video } = req.body;
 
   // check if movie exist in our database by id
   const existMovie = await Movie.findByIdAndUpdate(
     { _id: id },
-    { description, actors, releaseDate, bannerImage, slug },
+    { description, actors, releaseDate, bannerImage, video },
     { new: true }
   );
 
@@ -104,19 +104,19 @@ export const updateMovie = async (req, res) => {
 // @desc Add a review for movie into system by movie id
 export const addReview = async (req, res) => {
   const id = req.params.id;
-  const { reviews } = req.body;
+  const { review } = req.body;
 
   // find movie by id stored in the system
-  // const existedReviews = await Movie.findById({
-  //   _id: id,
-  // });
-  // existedReviews.reviews.push(reviews);
-  // const allReviews = existedReviews.reviews;
+  const existedReviews = await Movie.findById({
+    _id: id,
+  });
+  existedReviews.reviews.push(review);
+  const allReviews = existedReviews.reviews;
 
-  // // check if movie exist in our database by id
+  // check if movie exist in our database by id
   const existMovie = await Movie.findByIdAndUpdate(
     { _id: id },
-    { reviews },
+    { reviews: allReviews },
     { new: true }
   ).populate({
     path: "reviews.user",
@@ -124,7 +124,7 @@ export const addReview = async (req, res) => {
   });
 
   if (!existMovie) {
-    return res.status(400).json({ error: "Movie does not exist" });
+    return res.status(400).json({ message: "Movie does not exist" });
   } else {
     return res.status(200).json(existMovie);
   }

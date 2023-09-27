@@ -1,4 +1,4 @@
-const BASEURL = "http://localhost:8080/api";
+const BASEURL = process.env.REACT_APP_BASEURL;
 
 export const register = async (userData, dispatch, navigate) => {
   // Make a POST request
@@ -7,6 +7,7 @@ export const register = async (userData, dispatch, navigate) => {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
       },
       body: JSON.stringify(userData),
     });
@@ -29,6 +30,7 @@ export const login = async (userData, dispatch, navigate) => {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
       },
       body: JSON.stringify(userData),
     });
@@ -57,7 +59,12 @@ export const fetchmovies = async (dispatch, query) => {
   }
   // Make a GET request
   try {
-    const res = await fetch(`${BASEURL}/movie${querypoint}`);
+    const res = await fetch(`${BASEURL}/movie${querypoint}`, {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+      },
+    });
     const data = await res.json();
     if (query) {
       dispatch({
@@ -79,7 +86,12 @@ export const fetchmovies = async (dispatch, query) => {
 export const fetchmovie = async (slug, setState) => {
   // Make a GET request
   try {
-    const res = await fetch(`${BASEURL}/movie/${slug}`);
+    const res = await fetch(`${BASEURL}/movie/${slug}`, {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+      },
+    });
     const data = await res.json();
     if (data.message) {
       console.log(data.message);
@@ -91,16 +103,16 @@ export const fetchmovie = async (slug, setState) => {
   }
 };
 
-export const postReview = async (movieId, reviews, setState) => {
+export const postReview = async (movieId, review, setState) => {
   // Make a POST request
-
   try {
     const res = await fetch(`${BASEURL}/movie/review/${movieId}`, {
       method: "POST",
-      body: JSON.stringify(reviews),
-      // headers: {
-      //   con
-      // }
+      body: JSON.stringify(review),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+      },
     });
     const data = await res.json();
     if (data.message) {

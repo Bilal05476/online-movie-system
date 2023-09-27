@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInput = ({ type, id, label, value, onChange }) => {
+const FormInput = ({ type, id, label, value, onChange, readOnly }) => {
   return (
     <div className="form-outline mb-4">
       <input
@@ -10,6 +10,7 @@ const FormInput = ({ type, id, label, value, onChange }) => {
         value={value}
         onChange={onChange}
         placeholder={label}
+        readOnly={readOnly && true}
       />
       <label className="form-label" htmlFor={id}>
         {label}

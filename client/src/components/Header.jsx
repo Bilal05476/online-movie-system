@@ -6,7 +6,7 @@ import {
 } from "react-icons/bs";
 import { fetchmovies } from "./endPoint";
 import { useStateValue } from "../StateProvider";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 const Header = ({
   user,
   profilePopover,
@@ -15,27 +15,32 @@ const Header = ({
   setQuery,
 }) => {
   const [{ searched }, dispatch] = useStateValue();
+  const location = useLocation();
   console.log(searched);
   return (
     <div className="d-flex align-items-center header justify-content-between ">
       {/* Logo */}
-      <img
-        src="/assets/img/logo.jpg"
-        alt="logo"
-        style={{ width: "100px", height: "50px" }}
-      />
+      <NavLink to="/">
+        <img
+          src="/assets/img/logo.jpg"
+          alt="logo"
+          style={{ width: "100px", height: "50px" }}
+        />
+      </NavLink>
       {/* Search bar and profile link */}
       <div className="d-flex align-items-center">
-        <div className="text-light mx-5 d-flex align-items-center justify-content-end">
-          <input
-            className="search mx-3 bg-transparent text-light"
-            type="text"
-            placeholder="Search..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <BsSearch onClick={() => fetchmovies(dispatch, query)} size={20} />
-        </div>
+        {location.pathname === "/" && (
+          <div className="text-light mx-5 d-flex align-items-center justify-content-end">
+            <input
+              className="search mx-3 bg-transparent text-light"
+              type="text"
+              placeholder="Search..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <BsSearch onClick={() => fetchmovies(dispatch, query)} size={20} />
+          </div>
+        )}
         {user ? (
           <span
             onClick={() => setProfilePopover(!profilePopover)}

@@ -5,6 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { FormTextArea } from "../../../common/FormInput";
 import BtnBlock from "../../../common/BtnBlock";
 import { useStateValue } from "../../../StateProvider";
+import NavBtn from "../../../common/NavBtn";
 
 const MovieScreen = () => {
   const params = useParams();
@@ -14,31 +15,51 @@ const MovieScreen = () => {
   const [hover, setHover] = useState(null);
   const [{ user }] = useStateValue();
 
+  console.log(movie);
+
   useEffect(() => {
     fetchmovie(params.slug, setMovie);
   }, []);
 
   const handleAddReview = () => {
-    const reviews = {
-      reviews: { user: user._id, rating, text },
+    const review = {
+      review: { user: user._id, rating, text },
     };
-    console.log(reviews);
-    // postReview(movie._id, reviews, setMovie);
+    postReview(movie._id, review, setMovie);
   };
   return (
-    <div className="container-fluid movie-screen py-5">
+    <div className="container-fluid movie-screen">
       <div className="container">
+        {user?.admin && (
+          <div className="row">
+            <div className="col-md-6"></div>
+            <div className="col-md-3">
+              <NavBtn
+                bgcolor={"crimson"}
+                to={`/movie/update/${movie?.slug}`}
+                text={"Update Movie"}
+              />
+            </div>
+            <div className="col-md-3">
+              <NavBtn
+                bgcolor={"crimson"}
+                to="/movie/create"
+                text={"Create Movie"}
+              />
+            </div>
+          </div>
+        )}
         <div className="row d-flex align-items-center movie-content">
           <div className="left col-12 col-md-7">
             <div className="row">
               <div className="col-12 col-md-4 banner-container">
                 <img src={movie?.bannerImage} alt={movie?.title} />
               </div>
-              <div className="col-12 col-md-6 content-container p-2 px-4">
+              <div className="col-12 col-md-8 content-container p-2 px-4">
                 <h3>{movie?.title}</h3>
                 <p>{movie?.description}</p>
                 <div className="movie-actors">
-                  Actors:{" "}
+                  Actors:
                   {movie?.actors?.map((item, ind) => (
                     <span key={ind}>{item}</span>
                   ))}
@@ -47,7 +68,20 @@ const MovieScreen = () => {
             </div>
           </div>
           <div className="right col-12 col-md-5">
-            <video src={movie?.video} alt={movie?.title}></video>
+            {user ? (
+              <iframe
+                className="video-canvas"
+                src={movie?.video}
+                alt={movie?.title}
+                width="100%"
+              ></iframe>
+            ) : (
+              <NavBtn
+                to="/login"
+                text="Signin to watch now"
+                bgcolor={"crimson"}
+              />
+            )}
           </div>
         </div>
         <div className="row movie-reviews">
@@ -55,6 +89,9 @@ const MovieScreen = () => {
             {movie?.reviews?.map((item) => (
               <ReviewBlock key={item._id} item={item} />
             ))}
+            {movie?.reviews?.length === 0 && (
+              <span className="text-light text-italic">No reviews...</span>
+            )}
           </div>
           <div className="col-12 col-md-5 add-reviews">
             <div className="mb-3">
@@ -85,11 +122,19 @@ const MovieScreen = () => {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <BtnBlock
-              text="Add Review"
-              bgcolor="crimson"
-              click={() => handleAddReview()}
-            />
+            {user ? (
+              <BtnBlock
+                text="Add Review"
+                bgcolor="crimson"
+                click={() => handleAddReview()}
+              />
+            ) : (
+              <NavBtn
+                to="/login"
+                text="Signin to review now"
+                bgcolor={"crimson"}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -17,6 +17,12 @@
 input[type="radio"] {
   display: none;
 }
+.btns {
+  background-color: crimson;
+}
+.btns:hover {
+  background-color: #a41313;
+}
 .container-fluid {
   padding: 0;
 }
@@ -52,9 +58,7 @@ textarea {
   padding: 0rem 20rem;
   min-height: 100vh;
 }
-.movie-screen {
-  padding: 0;
-}
+
 .search {
   border: 2px solid #ccc;
   outline: none;
@@ -81,7 +85,6 @@ textarea {
   padding: 2rem 0rem;
 }
 .banner a {
-  background-color: crimson;
   color: #fff;
   text-decoration: none;
   padding: 1rem 4rem;
@@ -113,7 +116,9 @@ textarea {
   margin: 0.5rem;
   cursor: pointer;
 }
-
+.movie-screen {
+  padding: 5rem 0rem;
+}
 .movie-screen .left {
   color: white;
 }
@@ -146,16 +151,21 @@ textarea {
   color: #fff;
   padding: 0.2rem 0.4rem;
   border-radius: 5px;
-  margin-right: 0.2rem;
+  margin: 0rem 0.3rem 0.6rem 0.3rem;
 }
-.movie-screen .right {
+.movie-screen .right .video-canvas {
   border: 3px solid crimson;
   border-radius: 10px;
-  height: 350px;
+  height: 300px;
   overflow: hidden;
   background: linear-gradient(120deg, #fe3f3f 25%, #fc1e1e 50%, #a41313 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
+}
+.movie-screen .movie-actors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .movie-screen .movie-reviews {
   margin-top: 4rem;

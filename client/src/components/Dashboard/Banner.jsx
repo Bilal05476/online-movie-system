@@ -7,7 +7,9 @@ const Banner = () => {
       <p>
         Ready to watch? Enter your email to create or restart your membership.
       </p>
-      <a href="#top">Explore Now</a>
+      <a href="#top" className="btns">
+        Explore Now
+      </a>
     </div>
   );
 };

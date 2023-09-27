@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user.js";
 import movieRoutes from "./routes/movie.js";
+import { AuthorizeRequest } from "./middlewares/index.js";
 
 const app = express();
 app.use(cors());
@@ -41,9 +42,9 @@ db.once("open", () => {
 });
 
 // user routes
-app.use("/api/user", userRoutes);
+app.use("/api/user", AuthorizeRequest, userRoutes);
 // movie routes
-app.use("/api/movie", movieRoutes);
+app.use("/api/movie", AuthorizeRequest, movieRoutes);
 
 app.use("/", (req, res) => {
   res.status(200).json({
