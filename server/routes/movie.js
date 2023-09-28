@@ -2,6 +2,7 @@ import express from "express";
 import {
   addMovie,
   addReview,
+  deleteMovie,
   findMovie,
   findMovies,
   updateMovie,
@@ -10,9 +11,10 @@ const movieRoutes = express.Router();
 
 movieRoutes
   .get("/", findMovies)
+  .post("/", addMovie)
+  .put("/:id", updateMovie)
+  .delete("/:id", deleteMovie)
   .get("/:slug", findMovie)
-  .post("/create", addMovie)
-  .put("/update/:id", updateMovie)
   .post("/review/:id", addReview);
 
 export default movieRoutes;

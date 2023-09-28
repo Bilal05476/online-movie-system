@@ -46,6 +46,12 @@ const movieSchema = new mongoose.Schema({
   video: {
     type: String,
   },
+  average_rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+    default: 0,
+  },
 });
 
 // Create the Movie model
