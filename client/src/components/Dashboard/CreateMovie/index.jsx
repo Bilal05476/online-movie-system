@@ -14,11 +14,9 @@ const CreateMovie = () => {
     video: "",
   });
 
-  console.log(params);
-
   useEffect(() => {
     if (params.slug) fetchmovie(params.slug, setState);
-  });
+  }, []);
   return (
     <div>
       {params.slug ? (

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useStateValue } from "../../StateProvider";
-import Header from "../Header";
-import ProfilePopOver from "./ProfilePopOver";
 import Banner from "./Banner";
 import TopMovie from "./Movies/TopMovie";
 // import RecentMovie from "./RecentMovie.jsx";
@@ -16,15 +14,6 @@ const Dashboard = ({ query }) => {
 
   return (
     <div className="container-fluid dashbaord">
-      {/* Header */}
-      {/* <Header
-        user={user}
-        profilePopover={profilePopover}
-        setProfilePopover={setProfilePopover}
-        query={query}
-        setQuery={setQuery}
-      />
-      {profilePopover && <ProfilePopOver />} */}
       {/* Banner */}
       <Banner />
       <SearchMovie movies={searched} query={query} />
