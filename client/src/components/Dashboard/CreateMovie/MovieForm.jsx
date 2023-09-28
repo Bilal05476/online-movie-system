@@ -3,42 +3,49 @@ import { FormInput, FormTextArea } from "../../../common/FormInput";
 import ImageSection from "../../../common/ImageSection";
 import VideoSection from "../../../common/VideoSection";
 import BtnBlock from "../../../common/BtnBlock";
+import { addMovie, updateMovie } from "../../endPoint";
+import { useNavigate } from "react-router-dom";
 
-const Update = ({ state, setState }) => {
-  const { title, description, releaseDate, actors, bannerImage, video } = state;
+const MovieForm = ({ state, setState, action }) => {
+  const { title, description, releaseDate, actors, bannerImage, video, _id } =
+    state;
+  console.log(state);
   const [actor, setActor] = useState("");
-  const handleUpdate = () => {
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
     const movie = {
+      title,
       description,
       // convert date into ISO
       releaseDate: releaseDate.includes(":00.000Z")
         ? releaseDate
         : releaseDate + ":00.000Z",
-      // convert actors string into list
-      actors: typeof actors === "object" ? actors : actors?.split(", "),
+      actors,
       bannerImage,
       video,
     };
-    console.log(movie);
+    if (action === "Update") updateMovie(movie, _id, navigate);
+    if (action === "Create") addMovie(movie, setState, navigate);
   };
 
   useEffect(() => {
     if (actor.includes(", ")) {
       setState({
         ...state,
-        actors: [...actors, actor.replace(",", "")],
+        actors: [...actors, actor.replace(", ", "")],
       });
       setActor("");
     }
   }, [actor]);
-
   return (
     <div className="container-fluid movie-screen">
       <div className="container">
         <FormInput
           label="Title"
           value={title}
-          readOnly={true}
+          readOnly={action === "Update"}
           onChange={(e) =>
             setState({
               ...state,
@@ -70,7 +77,7 @@ const Update = ({ state, setState }) => {
         />
 
         <FormInput
-          label="Actors (Separated by comma ,)"
+          label="Actors (Separated by comma+space , )"
           type="text"
           value={actor}
           onChange={(e) => setActor(e.target.value)}
@@ -95,14 +102,15 @@ const Update = ({ state, setState }) => {
 
         <ImageSection state={state} setState={setState} />
         <VideoSection state={state} setState={setState} />
+
         <BtnBlock
-          text="Update a movie"
+          text={`${action} a movie`}
           bgcolor="crimson"
-          click={() => handleUpdate()}
+          click={() => handleSubmit()}
         />
       </div>
     </div>
   );
 };
 
-export default Update;
+export default MovieForm;

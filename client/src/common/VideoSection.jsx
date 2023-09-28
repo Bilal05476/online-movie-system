@@ -1,34 +1,40 @@
 import React from "react";
+import FileBase from "react-file-base64";
 import { FormInput } from "./FormInput";
 
 const VideoSection = ({ state, setState }) => {
   const { video, title } = state;
   return (
     <div
-      className="d-flex flex-wrap justify-content-between mb-5"
+      className="d-flex flex-wrap align-items-center justify-content-between mb-3"
       style={{
-        border: "1px solid crimson",
         borderRadius: "5px",
         padding: "1rem",
+        background: "rgba(255,255,255,0.5)",
       }}
     >
-      <FormInput
-        type="file"
-        label="Movie Video"
-        onChange={(e) =>
-          setState({
-            ...state,
-            video: e.target.files[0],
-          })
-        }
-      />
+      <div>
+        <FormInput
+          type="text"
+          label="Paste embedded URL"
+          value={video}
+          onChange={(e) => setState({ ...state, video: e.target.value })}
+        />
+        <small className="mx-2">OR</small>
+        <FileBase
+          multiple={false}
+          onDone={({ base64 }) => setState({ ...state, video: base64 })}
+        />
+      </div>
 
-      <iframe
-        className="video-canvas"
-        src={video}
-        alt={title}
-        width="100%"
-      ></iframe>
+      {video && (
+        <iframe
+          className="video-canvas"
+          src={video}
+          alt={title}
+          width="50%"
+        ></iframe>
+      )}
     </div>
   );
 };

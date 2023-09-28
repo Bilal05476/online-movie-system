@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useStateValue } from "../../StateProvider";
 import Banner from "./Banner";
 import TopMovie from "./Movies/TopMovie";
-// import RecentMovie from "./RecentMovie.jsx";
+import RecentMovie from "./Movies/RecentMovie.jsx";
 import SearchMovie from "./Movies/SearchMovie";
 import { fetchmovies } from "../endPoint";
 const Dashboard = ({ query }) => {
@@ -18,7 +18,7 @@ const Dashboard = ({ query }) => {
       <Banner />
       <SearchMovie movies={searched} query={query} />
       {/* Recently watched if user have past history */}
-      {/* <RecentMovie /> */}
+      <RecentMovie />
       {/* Top movie by rating */}
       <TopMovie movies={movies} />
     </div>

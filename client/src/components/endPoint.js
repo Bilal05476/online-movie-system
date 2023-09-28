@@ -124,3 +124,62 @@ export const postReview = async (movieId, review, setState) => {
     console.log(err.message);
   }
 };
+
+export const addMovie = async (movie, setState, navigate) => {
+  // Make a POST request
+  console.log(movie);
+  try {
+    const res = await fetch(`${BASEURL}/movie`, {
+      method: "POST",
+      body: JSON.stringify(movie),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+      },
+    });
+    const data = await res.json();
+    if (data.message) {
+      alert(data.message);
+    } else {
+      setState({
+        title: "",
+        description: "",
+        releaseDate: "",
+        bannerImage: "",
+        actors: [],
+        video: "",
+      });
+      alert("Movie added!");
+      setTimeout(() => {
+        navigate(`/movie/${data.slug}`);
+      }, 2000);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const updateMovie = async (movie, movieId, navigate) => {
+  // Make a PUT request
+  try {
+    const res = await fetch(`${BASEURL}/movie/${movieId}`, {
+      method: "PUT",
+      body: JSON.stringify(movie),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+      },
+    });
+    const data = await res.json();
+    if (data.message) {
+      alert(data.message);
+    } else {
+      alert("Movie added!");
+      setTimeout(() => {
+        navigate(`/movie/${data.slug}`);
+      }, 2000);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};

@@ -1,30 +1,26 @@
 import React from "react";
-import { FormInput } from "./FormInput";
+import FileBase from "react-file-base64";
 
 const ImageSection = ({ state, setState }) => {
   const { bannerImage, title } = state;
   return (
     <div
-      className="d-flex flex-wrap justify-content-between mb-3"
+      className="d-flex flex-wrap align-items-center justify-content-between mb-3"
       style={{
-        border: "1px solid crimson",
         borderRadius: "5px",
         padding: "1rem",
+        background: "rgba(255,255,255,0.5)",
       }}
     >
-      <FormInput
-        type="file"
-        label="Banner Image"
-        onChange={(e) =>
-          setState({
-            ...state,
-            bannerImage: e.target.files[0],
-          })
-        }
+      <FileBase
+        multiple={false}
+        onDone={({ base64 }) => setState({ ...state, bannerImage: base64 })}
       />
-      <div className="movie-item">
-        <img src={bannerImage} alt={title} />
-      </div>
+      {bannerImage && (
+        <div className="movie-item">
+          <img src={bannerImage} alt={title} />
+        </div>
+      )}
     </div>
   );
 };

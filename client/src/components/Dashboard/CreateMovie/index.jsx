@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import New from "./New";
-import Update from "./Update";
 import { fetchmovie } from "../../endPoint";
+import MovieForm from "./MovieForm";
 const CreateMovie = () => {
   const params = useParams();
   const [state, setState] = useState({
@@ -19,11 +18,11 @@ const CreateMovie = () => {
   }, []);
   return (
     <div>
-      {params.slug ? (
-        <Update state={state} setState={setState} />
-      ) : (
-        <New state={state} setState={setState} />
-      )}
+      <MovieForm
+        state={state}
+        setState={setState}
+        action={params.slug ? "Update" : "Create"}
+      />
     </div>
   );
 };
