@@ -9,13 +9,18 @@ const SignUp = ({ comState, dispatch, navigate }) => {
     email: "",
     password: "",
     cPassword: "",
+    phone: "",
   });
-  const { fullname, email, password, cPassword } = registerState;
+  const { fullname, email, password, cPassword, phone } = registerState;
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password && fullname) {
       if (password === cPassword && password.length >= 8) {
-        register({ email, password, name: fullname }, dispatch, navigate);
+        register(
+          { email, password, name: fullname, phone },
+          dispatch,
+          navigate
+        );
       } else {
         if (password.length < 8) {
           alert("Passwords should be min 8 charcter long");

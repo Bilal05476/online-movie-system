@@ -12,12 +12,16 @@ export const register = async (userData, dispatch, navigate) => {
       body: JSON.stringify(userData),
     });
     const data = await res.json();
-    dispatch({
-      type: "SET_USER",
-      user: data,
-    });
-    localStorage.setItem("user", JSON.stringify(data));
-    navigate("/");
+    if (data.message) {
+      alert(data.message);
+    } else {
+      dispatch({
+        type: "SET_USER",
+        user: data,
+      });
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/");
+    }
   } catch (err) {
     console.log(err.message);
   }
@@ -35,8 +39,8 @@ export const login = async (userData, dispatch, navigate) => {
       body: JSON.stringify(userData),
     });
     const data = await res.json();
-    if (data.error) {
-      alert(data.error);
+    if (data.message) {
+      alert(data.message);
     } else {
       dispatch({
         type: "SET_USER",
@@ -178,6 +182,33 @@ export const updateMovie = async (movie, movieId, navigate) => {
       setTimeout(() => {
         navigate(`/movie/${data.slug}`);
       }, 2000);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const watchNow = async (movieId, userId, dispatch) => {
+  // Make a PUT request
+  try {
+    const res = await fetch(`${BASEURL}/user`, {
+      method: "PUT",
+      body: JSON.stringify({ movieId, userId }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+      },
+    });
+    const data = await res.json();
+    if (data.message) {
+      alert(data.message);
+    } else {
+      alert("Movie added to your watched history!");
+      dispatch({
+        type: "SET_USER",
+        user: data,
+      });
+      localStorage.setItem("user", JSON.stringify(data));
     }
   } catch (err) {
     console.log(err.message);

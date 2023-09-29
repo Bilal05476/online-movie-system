@@ -14,6 +14,8 @@ const App = () => {
   const [query, setQuery] = useState("");
   const location = useLocation();
 
+  console.log(user);
+
   return (
     <div className="movies-project" style={{ position: "relative" }}>
       {/* Header */}

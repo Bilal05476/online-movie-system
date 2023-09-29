@@ -5,6 +5,7 @@ import TopMovie from "./Movies/TopMovie";
 import RecentMovie from "./Movies/RecentMovie.jsx";
 import SearchMovie from "./Movies/SearchMovie";
 import { fetchmovies } from "../endPoint";
+import AllMovie from "./Movies/AllMovie";
 const Dashboard = ({ query }) => {
   const [{ user, movies, searched }, dispatch] = useStateValue();
 
@@ -18,9 +19,13 @@ const Dashboard = ({ query }) => {
       <Banner />
       <SearchMovie movies={searched} query={query} />
       {/* Recently watched if user have past history */}
-      <RecentMovie />
-      {/* Top movie by rating */}
+      {user?.watchedMovies.length > 0 && (
+        <RecentMovie movies={user?.watchedMovies} />
+      )}
+      {/* Top movies by rating */}
       <TopMovie movies={movies} />
+      {/* All movies by rating */}
+      <AllMovie movies={movies} />
     </div>
   );
 };

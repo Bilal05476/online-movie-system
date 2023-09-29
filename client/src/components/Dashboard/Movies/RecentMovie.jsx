@@ -1,14 +1,15 @@
 import React from "react";
-// import MovieItem from "../MovieItem";
+import MovieItem from "../MovieItem";
 
-const RecentMovie = () => {
+const RecentMovie = ({ movies }) => {
+  console.log(movies);
   return (
     <div className="movie-section">
       <h3>Watched History</h3>
       <div className="movie-container">
-        {/* {[...Array(10)].map((item) => (
-          <MovieItem key={item} />
-        ))} */}
+        {movies.map((item) => (
+          <MovieItem item={item.movie} key={item.movie._id} />
+        ))}
       </div>
     </div>
   );

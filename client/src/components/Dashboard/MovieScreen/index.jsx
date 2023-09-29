@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchmovie, postReview } from "../../endPoint";
+import { fetchmovie, postReview, watchNow } from "../../endPoint";
 import { FaStar } from "react-icons/fa";
 import { FormTextArea } from "../../../common/FormInput";
 import BtnBlock from "../../../common/BtnBlock";
@@ -13,9 +13,9 @@ const MovieScreen = () => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-  const [{ user }] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
-  console.log(movie);
+  // console.log(user.watchedMovies?.some((item) => item._id === movie._id));
 
   useEffect(() => {
     fetchmovie(params.slug, setMovie);
@@ -56,6 +56,11 @@ const MovieScreen = () => {
                 <img src={movie?.bannerImage} alt={movie?.title} />
               </div>
               <div className="col-12 col-md-8 content-container p-2 px-4">
+                {movie?.average_rating > 0 && (
+                  <span className="m-0">
+                    <FaStar color="gold" size={18} /> ({movie?.average_rating})
+                  </span>
+                )}
                 <h3>{movie?.title}</h3>
                 <p>{movie?.description}</p>
                 <div className="movie-actors">
@@ -68,19 +73,39 @@ const MovieScreen = () => {
             </div>
           </div>
           <div className="right col-12 col-md-5">
-            {user ? (
-              <iframe
-                className="video-canvas"
-                src={movie?.video}
-                alt={movie?.title}
-                width="100%"
-              ></iframe>
-            ) : (
+            {!user && (
               <NavBtn
                 to="/login"
                 text="Signin to watch now"
                 bgcolor={"crimson"}
               />
+            )}
+            {user && (
+              <React.Fragment>
+                {user.watchedMovies?.some(
+                  (item) => item.movie._id === movie._id
+                ) ? (
+                  <React.Fragment>
+                    <iframe
+                      className="video-canvas"
+                      src={movie?.video}
+                      alt={movie?.title}
+                      width="100%"
+                    ></iframe>
+                    <BtnBlock
+                      click={() => {}}
+                      text="Mark Done"
+                      bgcolor={"crimson"}
+                    />
+                  </React.Fragment>
+                ) : (
+                  <BtnBlock
+                    click={() => watchNow(movie._id, user._id, dispatch)}
+                    text="Watch now"
+                    bgcolor={"crimson"}
+                  />
+                )}
+              </React.Fragment>
             )}
           </div>
         </div>
