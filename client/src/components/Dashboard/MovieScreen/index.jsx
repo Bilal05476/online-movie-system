@@ -75,7 +75,7 @@ const MovieScreen = () => {
           <div className="right col-12 col-md-5">
             {!user && (
               <NavBtn
-                to="/login"
+                to="/auth"
                 text="Signin to watch now"
                 bgcolor={"crimson"}
               />
@@ -155,7 +155,7 @@ const MovieScreen = () => {
               />
             ) : (
               <NavBtn
-                to="/login"
+                to="/auth"
                 text="Signin to review now"
                 bgcolor={"crimson"}
               />

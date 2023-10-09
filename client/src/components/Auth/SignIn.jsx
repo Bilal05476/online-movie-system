@@ -14,7 +14,10 @@ const SignIn = ({ comState, dispatch, navigate }) => {
     if (email && password) {
       login({ email, password }, dispatch, navigate);
     } else {
-      alert("Provide all fields");
+      dispatch({
+        type: "SET_TOASTER",
+        toast: "Provide all fields",
+      });
     }
   };
   return (

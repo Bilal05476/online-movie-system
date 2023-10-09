@@ -13,7 +13,10 @@ export const register = async (userData, dispatch, navigate) => {
     });
     const data = await res.json();
     if (data.message) {
-      alert(data.message);
+      dispatch({
+        type: "SET_TOASTER",
+        toast: data.message,
+      });
     } else {
       dispatch({
         type: "SET_USER",
@@ -40,7 +43,11 @@ export const login = async (userData, dispatch, navigate) => {
     });
     const data = await res.json();
     if (data.message) {
-      alert(data.message);
+      // alert(data.message);
+      dispatch({
+        type: "SET_TOASTER",
+        toast: data.message,
+      });
     } else {
       dispatch({
         type: "SET_USER",
@@ -143,7 +150,11 @@ export const addMovie = async (movie, setState, navigate) => {
     });
     const data = await res.json();
     if (data.message) {
-      alert(data.message);
+      // alert(data.message);
+      dispatch({
+        type: "SET_TOASTER",
+        toast: data.message,
+      });
     } else {
       setState({
         title: "",
@@ -153,7 +164,11 @@ export const addMovie = async (movie, setState, navigate) => {
         actors: [],
         video: "",
       });
-      alert("Movie added!");
+      // alert("Movie added!");
+      dispatch({
+        type: "SET_TOASTER",
+        toast: "Movie added!",
+      });
       setTimeout(() => {
         navigate(`/movie/${data.slug}`);
       }, 2000);
@@ -176,9 +191,17 @@ export const updateMovie = async (movie, movieId, navigate) => {
     });
     const data = await res.json();
     if (data.message) {
-      alert(data.message);
+      // alert(data.message);
+      dispatch({
+        type: "SET_TOASTER",
+        toast: data.message,
+      });
     } else {
-      alert("Movie added!");
+      // alert("Movie added!");
+      dispatch({
+        type: "SET_TOASTER",
+        toast: "Movie added!",
+      });
       setTimeout(() => {
         navigate(`/movie/${data.slug}`);
       }, 2000);
@@ -201,7 +224,11 @@ export const watchNow = async (movieId, userId, dispatch) => {
     });
     const data = await res.json();
     if (data.message) {
-      alert(data.message);
+      // alert(data.message);
+      dispatch({
+        type: "SET_TOASTER",
+        toast: data.message,
+      });
     } else {
       alert("Movie added to your watched history!");
       dispatch({

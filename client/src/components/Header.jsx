@@ -22,9 +22,9 @@ const Header = ({
       {/* Logo */}
       <NavLink to="/">
         <img
-          src="/assets/img/logo.jpg"
+          src="/assets/img/movie.png"
           alt="logo"
-          style={{ width: "100px", height: "50px" }}
+          style={{ width: "100px", height: "100px", position: "absolute" }}
         />
       </NavLink>
       {/* Search bar and profile link */}
@@ -54,7 +54,7 @@ const Header = ({
             )}
           </span>
         ) : (
-          <NavLink to="/login" className="btn text-light bg-danger">
+          <NavLink to="/auth" className="btn text-light bg-danger">
             Sign In
           </NavLink>
         )}

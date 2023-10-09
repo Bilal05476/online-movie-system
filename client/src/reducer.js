@@ -2,6 +2,7 @@ export const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   movies: [],
   searched: [],
+  toaster: null,
 };
 
 const reducer = (state, action) => {
@@ -26,6 +27,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         searched: action.movies,
+      };
+    case "NULL_TOASTER":
+      return {
+        ...state,
+        toaster: null,
+      };
+    case "SET_TOASTER":
+      return {
+        ...state,
+        toaster: action.toast,
       };
 
     default:

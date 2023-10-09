@@ -25,11 +25,17 @@ const SignUp = ({ comState, dispatch, navigate }) => {
         if (password.length < 8) {
           alert("Passwords should be min 8 charcter long");
         } else {
-          alert("Passwords should be same");
+          dispatch({
+            type: "SET_TOASTER",
+            toast: "Passwords should be same",
+          });
         }
       }
     } else {
-      alert("Provide all fields");
+      dispatch({
+        type: "SET_TOASTER",
+        toast: "Provide all fields",
+      });
     }
   };
   return (

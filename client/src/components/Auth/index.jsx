@@ -7,13 +7,25 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [comState, setComState] = useState("Login");
-  const [{ user }, dispatch] = useStateValue();
-  console.log(user);
+  const [{ toaster }, dispatch] = useStateValue();
+  console.log(toaster);
   const navigate = useNavigate();
 
   return (
     <div className="container-fluid auth">
       <div className="container p-5">
+        <div
+          className={`d-flex align-items-center justify-content-${
+            comState === "Login" ? "start" : "end"
+          } mb-5`}
+        >
+          <img
+            src="/assets/img/movie.png"
+            style={{
+              width: "30%",
+            }}
+          />
+        </div>
         {/* Pills navs */}
         <ul
           className="nav nav-pills nav-justified mb-3"
