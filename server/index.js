@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 import userRoutes from "./routes/user.js";
 import movieRoutes from "./routes/movie.js";
 import { AuthorizeRequest } from "./middlewares/index.js";
@@ -27,19 +27,19 @@ app.use(
   })
 );
 
-// const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL;
 
-// mongoose.connect(connectionString, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-// const db = mongoose.connection;
+const db = mongoose.connection;
 
-// db.on("error", console.error.bind(console, "MongoDB connection error:"));
-// db.once("open", () => {
-//   console.log("Connected to MongoDB");
-// });
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
+});
 
 // user routes
 app.use("/api/user", AuthorizeRequest, userRoutes);
