@@ -46,7 +46,7 @@ app.use("/api/user", AuthorizeRequest, userRoutes);
 // movie routes
 app.use("/api/movie", AuthorizeRequest, movieRoutes);
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     message: `Server Running!`,
   });
