@@ -42,9 +42,9 @@ db.once("open", () => {
 });
 
 // user routes
-app.use("/api/user", AuthorizeRequest, userRoutes);
+// app.use("/api/user", AuthorizeRequest, userRoutes);
 // movie routes
-app.use("/api/movie", AuthorizeRequest, movieRoutes);
+// app.use("/api/movie", AuthorizeRequest, movieRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
