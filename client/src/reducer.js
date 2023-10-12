@@ -28,16 +28,18 @@ const reducer = (state, action) => {
         ...state,
         searched: action.movies,
       };
-    case "NULL_TOASTER":
-      return {
-        ...state,
-        toaster: null,
-      };
     case "SET_TOASTER":
-      return {
-        ...state,
-        toaster: action.toast,
-      };
+      if (state.toaster) {
+        return {
+          ...state,
+          toaster: null,
+        };
+      } else {
+        return {
+          ...state,
+          toaster: action.toast,
+        };
+      }
 
     default:
       return state;

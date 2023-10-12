@@ -18,6 +18,11 @@ const SignIn = ({ comState, dispatch, navigate }) => {
         type: "SET_TOASTER",
         toast: "Provide all fields",
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     }
   };
   return (

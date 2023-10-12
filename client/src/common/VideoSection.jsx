@@ -6,11 +6,12 @@ const VideoSection = ({ state, setState }) => {
   const { video, title } = state;
   return (
     <div
-      className="d-flex flex-wrap align-items-center justify-content-between mb-3"
+      className="video d-flex flex-wrap align-items-center justify-content-between mb-3"
       style={{
         borderRadius: "5px",
         padding: "1rem",
         background: "rgba(255,255,255,0.5)",
+        overflow: "hidden",
       }}
     >
       <div>
@@ -20,6 +21,7 @@ const VideoSection = ({ state, setState }) => {
           value={video}
           onChange={(e) => setState({ ...state, video: e.target.value })}
         />
+
         <small className="mx-2">OR</small>
         <FileBase
           multiple={false}

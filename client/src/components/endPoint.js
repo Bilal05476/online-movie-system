@@ -17,6 +17,11 @@ export const register = async (userData, dispatch, navigate) => {
         type: "SET_TOASTER",
         toast: data.message,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     } else {
       dispatch({
         type: "SET_USER",
@@ -48,6 +53,11 @@ export const login = async (userData, dispatch, navigate) => {
         type: "SET_TOASTER",
         toast: data.message,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     } else {
       dispatch({
         type: "SET_USER",
@@ -154,6 +164,11 @@ export const addMovie = async (movie, setState, navigate) => {
         type: "SET_TOASTER",
         toast: data.message,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     } else {
       setState({
         title: "",
@@ -168,6 +183,11 @@ export const addMovie = async (movie, setState, navigate) => {
         type: "SET_TOASTER",
         toast: "Movie added!",
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
       setTimeout(() => {
         navigate(`/movie/${data.slug}`);
       }, 2000);
@@ -195,12 +215,22 @@ export const updateMovie = async (movie, movieId, navigate) => {
         type: "SET_TOASTER",
         toast: data.message,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     } else {
       // alert("Movie added!");
       dispatch({
         type: "SET_TOASTER",
         toast: "Movie added!",
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
       setTimeout(() => {
         navigate(`/movie/${data.slug}`);
       }, 2000);
@@ -228,6 +258,11 @@ export const watchNow = async (movieId, userId, dispatch) => {
         type: "SET_TOASTER",
         toast: data.message,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     } else {
       alert("Movie added to your watched history!");
       dispatch({

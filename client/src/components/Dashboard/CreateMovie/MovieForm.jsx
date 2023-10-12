@@ -27,7 +27,28 @@ const MovieForm = ({ state, setState, action }) => {
       video,
     };
     if (action === "Update") updateMovie(movie, _id, navigate);
-    if (action === "Create") addMovie(movie, setState, navigate);
+    if (action === "Create") {
+      if (
+        title &&
+        description &&
+        releaseDate &&
+        actors &&
+        bannerImage &&
+        video
+      ) {
+        addMovie(movie, setState, navigate);
+      } else {
+        dispatch({
+          type: "SET_TOASTER",
+          toast: "Provide all fields to add movie!",
+        });
+        setTimeout(() => {
+          dispatch({
+            type: "SET_TOASTER",
+          });
+        }, 2000);
+      }
+    }
   };
 
   useEffect(() => {

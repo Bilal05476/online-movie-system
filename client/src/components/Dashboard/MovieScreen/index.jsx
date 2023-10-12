@@ -55,7 +55,7 @@ const MovieScreen = () => {
               <div className="col-12 col-md-4 banner-container">
                 <img src={movie?.bannerImage} alt={movie?.title} />
               </div>
-              <div className="col-12 col-md-8 content-container p-2 px-4">
+              <div className="col-12 col-md-8 content-container">
                 {movie?.average_rating > 0 && (
                   <span className="m-0">
                     <FaStar color="gold" size={18} /> ({movie?.average_rating})

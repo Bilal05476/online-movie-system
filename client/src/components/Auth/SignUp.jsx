@@ -29,6 +29,11 @@ const SignUp = ({ comState, dispatch, navigate }) => {
             type: "SET_TOASTER",
             toast: "Passwords should be same",
           });
+          setTimeout(() => {
+            dispatch({
+              type: "SET_TOASTER",
+            });
+          }, 2000);
         }
       }
     } else {
@@ -36,6 +41,11 @@ const SignUp = ({ comState, dispatch, navigate }) => {
         type: "SET_TOASTER",
         toast: "Provide all fields",
       });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_TOASTER",
+        });
+      }, 2000);
     }
   };
   return (

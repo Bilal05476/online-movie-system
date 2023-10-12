@@ -14,21 +14,7 @@ const Toast = () => {
     }, 2500);
   }, [toaster]);
   return (
-    <div
-      style={{
-        position: "absolute",
-        backgroundColor: "crimson",
-        padding: "0.5rem 1rem",
-        borderRadius: "5px",
-        bottom: 30,
-        right: 30,
-        color: "#fff",
-        display: "flex",
-        alignItems: "center",
-        paddingRight: "0.5rem",
-        maxWidth: "30%",
-      }}
-    >
+    <div className="toaster">
       {toaster}{" "}
       <SlClose
         size={22}

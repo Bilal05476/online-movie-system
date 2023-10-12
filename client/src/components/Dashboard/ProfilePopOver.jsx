@@ -8,13 +8,14 @@ const ProfilePopOver = ({ setProfilePopover }) => {
       style={{
         position: "absolute",
         right: 20,
-        width: "10%",
+        width: "30%",
         border: "2px solid #ccc",
         borderRadius: "5px",
+        textAlign: "center",
       }}
       className="p-2 d-flex flex-column"
     >
-      <span className="text-white">Account</span>
+      {/* <span className="text-white">Account</span> */}
       <span
         className="text-white"
         onClick={() => {

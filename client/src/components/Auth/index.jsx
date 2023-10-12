@@ -13,16 +13,12 @@ const Auth = () => {
 
   return (
     <div className="container-fluid auth">
-      <div className="container p-5">
-        <div
-          className={`d-flex align-items-center justify-content-${
-            comState === "Login" ? "start" : "end"
-          } mb-5`}
-        >
+      <div className="container p-3">
+        <div className="d-flex align-items-center justify-content-center mb-3">
           <img
             src="/assets/img/movie.png"
             style={{
-              width: "30%",
+              width: "50%",
             }}
           />
         </div>

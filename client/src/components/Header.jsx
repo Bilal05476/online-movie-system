@@ -7,6 +7,7 @@ import {
 import { fetchmovies } from "./endPoint";
 import { useStateValue } from "../StateProvider";
 import { NavLink, useLocation } from "react-router-dom";
+import { BiLogInCircle } from "react-icons/bi";
 const Header = ({
   user,
   profilePopover,
@@ -21,16 +22,12 @@ const Header = ({
     <div className="d-flex align-items-center header justify-content-between ">
       {/* Logo */}
       <NavLink to="/">
-        <img
-          src="/assets/img/movie.png"
-          alt="logo"
-          style={{ width: "100px", height: "100px", position: "absolute" }}
-        />
+        <img src="/assets/img/movie.png" alt="logo" className="logo" />
       </NavLink>
       {/* Search bar and profile link */}
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center ">
         {location.pathname === "/" && (
-          <div className="text-light mx-5 d-flex align-items-center justify-content-end">
+          <div className="d-none d-md-block text-light  d-flex align-items-center justify-content-center">
             <input
               className="search mx-3 bg-transparent text-light"
               type="text"
@@ -54,7 +51,8 @@ const Header = ({
             )}
           </span>
         ) : (
-          <NavLink to="/auth" className="btn text-light bg-danger">
+          <NavLink to="/auth" className="btn btns text-light">
+            <BiLogInCircle size={22} className="mx-1" />
             Sign In
           </NavLink>
         )}

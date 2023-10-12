@@ -9,6 +9,15 @@ const AllMovie = ({ movies }) => {
         {movies.map((item) => (
           <MovieItem key={item._id} item={item} />
         ))}
+        {movies.map((item) => (
+          <MovieItem key={item._id} item={item} />
+        ))}
+        {movies.map((item) => (
+          <MovieItem key={item._id} item={item} />
+        ))}
+        {movies.map((item) => (
+          <MovieItem key={item._id} item={item} />
+        ))}
       </div>
     </div>
   );

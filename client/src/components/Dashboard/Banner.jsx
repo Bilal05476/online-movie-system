@@ -1,4 +1,5 @@
 import React from "react";
+import { BsFillPlayFill } from "react-icons/bs";
 const Banner = () => {
   return (
     <div className="banner">
@@ -8,6 +9,7 @@ const Banner = () => {
         Ready to watch? Enter your email to create or restart your membership.
       </p>
       <a href="#top" className="btns">
+        <BsFillPlayFill size={25} />
         Explore Now
       </a>
     </div>
