@@ -2,7 +2,6 @@ import React from "react";
 import MovieItem from "../MovieItem";
 
 const RecentMovie = ({ movies }) => {
-  console.log(movies);
   return (
     <div className="movie-section">
       <h3>Watched History</h3>

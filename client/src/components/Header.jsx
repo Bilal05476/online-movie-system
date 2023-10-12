@@ -16,7 +16,7 @@ const Header = ({
 }) => {
   const [{ searched }, dispatch] = useStateValue();
   const location = useLocation();
-  console.log(searched);
+  // console.log(searched);
   return (
     <div className="d-flex align-items-center header justify-content-between ">
       {/* Logo */}

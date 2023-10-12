@@ -83,7 +83,6 @@ export const fetchmovies = async (dispatch, query) => {
         movies: data,
       });
     } else {
-      console.log(data);
       dispatch({
         type: "SET_MOVIES",
         movies: data,
