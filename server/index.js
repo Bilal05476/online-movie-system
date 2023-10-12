@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/user.js";
 import movieRoutes from "./routes/movie.js";
 import { AuthorizeRequest } from "./middlewares/index.js";
-import User from "./models/user.js";
 
 const app = express();
 app.use(cors());
@@ -57,7 +56,3 @@ app.listen(port, () => {
   console.log(`Server Running at port: ${port}`);
 });
 
-// const main = async () => {
-//   console.log(await User.find({}));
-// };
-// main();
